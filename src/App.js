@@ -50,7 +50,7 @@ function App() {
           </div>
         </div>
       ) : (
-        <div>
+        <div className="main-container">
           <h3>Select A Lottery</h3>
           <div className="lottery-container">
             {lotteryList.map((x, index) => (
