@@ -1,25 +1,76 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import Box from "./Box";
+import Details from "./Details";
+import Description from "./Description";
+
+import { nftList, lotteryList } from "./mockdata";
 
 function App() {
+  const [lotteryId, setLotteryId] = useState("");
+  const [lotteryType, setLotteryType] = useState("");
+  const [nftInfo, setNftInfo] = useState({});
+
+  const getLotterySelected = (id) => {
+    const getLotteryInfo = nftList.find((x) => x.id === id);
+    setNftInfo({
+      headers: getLotteryInfo.lotteryHeader,
+      description: getLotteryInfo.description,
+      nftList: getLotteryInfo.nfts,
+    });
+  };
+
+  const handleClick = (value) => {
+    if (value.type !== "nft") {
+      setLotteryId(value.id);
+      setLotteryType(value.type);
+      getLotterySelected(value.id);
+    } else {
+      setLotteryType("nft");
+    }
+  };
+
+  useEffect(() => {}, [nftInfo]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {lotteryType === "lottery" ? (
+        <div className="nft-detail-container">
+          <Details {...nftInfo.headers} />
+          <Description content={nftInfo.description} />
+          <div className="nft-container">
+            {nftList
+              .find((x) => x.id === lotteryId)
+              .nfts.map((nftData, index) => (
+                <Box
+                  name={nftData.name}
+                  number={index + 1}
+                  id={nftData.id}
+                  type="nft"
+                  key={index + 1}
+                  handleClick={handleClick}
+                />
+              ))}
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h3>Select A Lottery</h3>
+          <div className="lottery-container">
+            {lotteryList.map((x, index) => (
+              <Box
+                name={x.name}
+                number={index + 1}
+                id={x.id}
+                type="lottery"
+                handleClick={handleClick}
+                key={index + 1}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
+//       <Details name="Whats Up" grade="3" numberOfNft="8" />
 export default App;
