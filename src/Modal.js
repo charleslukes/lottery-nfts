@@ -23,8 +23,8 @@ function ViewRulesModal({ modalIsOpen, closeModal, afterOpenModal, content }) {
       >
         <div className="modal-content">
           <h2>Hello</h2>
-          <button onClick={closeModal}>close</button>
           <div>{content}</div>
+          <button onClick={closeModal}>close</button>
         </div>
       </Modal>
     </div>
