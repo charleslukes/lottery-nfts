@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Box from "./Box";
 import Details from "./Details";
 import Description from "./Description";
@@ -27,8 +27,6 @@ function App() {
       setLotteryType(nft);
     }
   };
-
-  useEffect(() => {}, [nftInfo]);
 
   return (
     <div className="App">
