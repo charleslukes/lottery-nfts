@@ -2,6 +2,8 @@ import { useState } from "react";
 import Box from "./Box";
 import Details from "./Details";
 import Description from "./Description";
+import Modal from "react-modal";
+import ViewRulesModal from "./Modal";
 
 import { nftList, lotteryList } from "./mockdata";
 import { lottery, nft } from "./constants";
@@ -9,12 +11,24 @@ import { lottery, nft } from "./constants";
 function App() {
   const [lotteryType, setLotteryType] = useState("");
   const [nftInfo, setNftInfo] = useState({});
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  Modal.setAppElement("#root");
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const getLotterySelected = (id) => {
     const getLotteryInfo = nftList.find((x) => x.id === id);
     setNftInfo({
       headers: getLotteryInfo.lotteryHeader,
       description: getLotteryInfo.description,
+      rules: getLotteryInfo.rules,
       nftList: getLotteryInfo.nfts,
     });
   };
@@ -28,12 +42,18 @@ function App() {
     }
   };
 
+  const displayModal = () => {
+    openModal();
+  };
+
   return (
     <div className="App">
       {lotteryType === lottery ? (
         <div className="nft-detail-container">
-          <Details {...nftInfo.headers} />
+          <Details {...nftInfo.headers} handleModalClick={displayModal} />
           <Description content={nftInfo.description} />
+
+          <div className="border"></div>
           <div className="nft-container">
             {nftInfo.nftList.map((nftData, index) => (
               <Box
@@ -64,6 +84,12 @@ function App() {
           </div>
         </div>
       )}
+      <ViewRulesModal
+        openModal={openModal}
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        content={nftInfo.rules}
+      />
     </div>
   );
 }

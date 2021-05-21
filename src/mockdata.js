@@ -8,6 +8,7 @@ export const nftList = [
       currentLotteryNumber: 1,
     },
     description: "Description of the collection of artists",
+    rules: "This is the rule of the artist",
     nfts: [
       { name: "NFT" },
       { name: "NFT" },
@@ -28,6 +29,7 @@ export const nftList = [
       currentLotteryNumber: 2,
     },
     description: "This is the description of the NFTs artists",
+    rules: "This is the rule of the new artist",
     nfts: [
       { name: "NFT" },
       { name: "NFT" },

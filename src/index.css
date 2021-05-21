@@ -42,7 +42,6 @@ code {
 }
 
 .description {
-  width: 80%;
   height: 250px;
   border: 1px solid;
   margin: 0 auto;
@@ -60,4 +59,18 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.view-rules {
+  cursor: pointer;
+}
+
+.border {
+  border: 1px solid;
+  margin-top: 20px;
+}
+
+.modal-content {
+  height: 500px;
+  width: 500px;
 }
