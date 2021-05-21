@@ -38,18 +38,16 @@ function App() {
           <Details {...nftInfo.headers} />
           <Description content={nftInfo.description} />
           <div className="nft-container">
-            {nftList
-              .find((x) => x.id === lotteryId)
-              .nfts.map((nftData, index) => (
-                <Box
-                  name={nftData.name}
-                  number={index + 1}
-                  id={nftData.id}
-                  type="nft"
-                  key={index + 1}
-                  handleClick={handleClick}
-                />
-              ))}
+            {nftInfo.nftList.map((nftData, index) => (
+              <Box
+                name={nftData.name}
+                number={index + 1}
+                id={nftData.id}
+                type="nft"
+                key={index + 1}
+                handleClick={handleClick}
+              />
+            ))}
           </div>
         </div>
       ) : (
