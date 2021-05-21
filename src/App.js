@@ -4,9 +4,9 @@ import Details from "./Details";
 import Description from "./Description";
 
 import { nftList, lotteryList } from "./mockdata";
+import { lottery, nft } from "./constants";
 
 function App() {
-  const [lotteryId, setLotteryId] = useState("");
   const [lotteryType, setLotteryType] = useState("");
   const [nftInfo, setNftInfo] = useState({});
 
@@ -20,12 +20,11 @@ function App() {
   };
 
   const handleClick = (value) => {
-    if (value.type !== "nft") {
-      setLotteryId(value.id);
+    if (value.type !== nft) {
       setLotteryType(value.type);
       getLotterySelected(value.id);
     } else {
-      setLotteryType("nft");
+      setLotteryType(nft);
     }
   };
 
@@ -33,7 +32,7 @@ function App() {
 
   return (
     <div className="App">
-      {lotteryType === "lottery" ? (
+      {lotteryType === lottery ? (
         <div className="nft-detail-container">
           <Details {...nftInfo.headers} />
           <Description content={nftInfo.description} />
@@ -43,7 +42,7 @@ function App() {
                 name={nftData.name}
                 number={index + 1}
                 id={nftData.id}
-                type="nft"
+                type={nft}
                 key={index + 1}
                 handleClick={handleClick}
               />
@@ -59,7 +58,7 @@ function App() {
                 name={x.name}
                 number={index + 1}
                 id={x.id}
-                type="lottery"
+                type={lottery}
                 handleClick={handleClick}
                 key={index + 1}
               />
@@ -70,5 +69,4 @@ function App() {
     </div>
   );
 }
-//       <Details name="Whats Up" grade="3" numberOfNft="8" />
 export default App;
