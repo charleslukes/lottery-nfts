@@ -10,7 +10,12 @@ import { lottery, nft } from "./constants";
 
 function App() {
   const [lotteryType, setLotteryType] = useState("");
-  const [nftInfo, setNftInfo] = useState({});
+  const [nftInfo, setNftInfo] = useState({
+    headers: {},
+    description: "",
+    rules: "",
+    nftList: [],
+  });
   const [modalIsOpen, setIsOpen] = useState(false);
 
   Modal.setAppElement("#root");
